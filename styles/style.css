@@ -5,6 +5,7 @@
 }
 
 body {
+  font-family: OpenSans-Medium;
   margin: 0;
   min-height: 100vh;
 }
@@ -12,6 +13,9 @@ body {
 :root {
   --white: #fff;
   --lime-500: #22c55e;
+  --slate-100: #f1f5f9;
+  --slate-200: #e2e8f0;
+  --slate-300: #cbd5e1;
   --slate-400: #94a3b8;
 }
 
@@ -20,7 +24,14 @@ body {
   src: url('../fonts/BreeSerif-Regular.ttf');
 }
 
+@font-face {
+  font-family: OpenSans-Medium;
+  src: url('../fonts/OpenSans-Medium.ttf');
+}
+
 #content {
+  display: flex;
+  flex-direction: column;
   min-height: 100vh;
 }
 
@@ -30,7 +41,7 @@ body {
   z-index: 1;
   gap: 10px;
   padding: 10px 20px;
-  box-shadow: 0px 2px 2px var(--slate-400);
+  box-shadow: 0px 1px 2px var(--slate-300);
   background: var(--lime-500);
 }
 
@@ -42,4 +53,60 @@ body {
 
 .checklist-icon {
   width: 55px;
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  max-width: 300px;
+  gap: 10px;
+  padding: 20px;
+  background: var(--slate-100);
+}
+
+.inbox-icon,
+.today-icon {
+  width: 24px;
+}
+
+.inbox,
+.today-list {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  padding: 8px;
+  border-radius: 5px;
+  gap: 10px;
+}
+
+.inbox:hover,
+.today-list:hover,
+.projects-container:hover *,
+.addproject-btn:hover {
+  background: var(--slate-200);
+}
+
+.projects-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 5px;
+}
+
+.addproject-btn {
+  cursor: pointer;
+  border: none;
+  height: 24px;
+  background: var(--slate-100);
+}
+
+.projects-container:hover {
+  background: var(--slate-200);
+}
+
+.addproject-icon {
+  width: 24px;
 }
