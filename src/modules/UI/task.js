@@ -56,6 +56,7 @@ const createDescContainer = (desc) => {
 const createDueDateContainer = (dueDate) => {
   const dueDateContainer = document.createElement('div');
   dueDateContainer.classList.add('duedate-container');
+  console.log(dueDate)
   dueDateContainer.textContent = dueDate;
   return dueDateContainer;
 };

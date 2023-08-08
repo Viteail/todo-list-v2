@@ -1,6 +1,7 @@
 import { createTodoForm } from '../UI/todoForm';
-import { removeTodoForm, todoListElm } from './cancel';
+import { removeTodoForm } from './cancel';
 import { Task, tasks, appendTask } from './Tasks';
+import format from 'date-fns/format';
 
 export const addTaskEvent = (taskAdder) => {
   taskAdder.addEventListener('click', () => {
@@ -20,7 +21,7 @@ export const addTask = () => {
     let todo = new Task(
       todoFormElms[0].value,
       todoFormElms[1].value,
-      todoFormElms[2].value,
+      formatDate(todoFormElms[2].value),
       todoFormElms[3].value
     );
     tasks.push(todo);
@@ -45,4 +46,8 @@ const attachValidClass = () => {
 
 export const emptyTodoFormElms = () => {
   todoFormElms = [];
+};
+
+const formatDate = (dueDate) => {
+  return format(new Date(dueDate.replace(/-/, ', ')), 'dd-MM-yyyy');
 };
