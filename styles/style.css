@@ -12,11 +12,15 @@ body {
 
 :root {
   --white: #fff;
+  --lime-100: #ecfccb;
+  --lime-300: #bef264;
   --lime-500: #22c55e;
+  --slate-50: #f8fafc;
   --slate-100: #f1f5f9;
   --slate-200: #e2e8f0;
   --slate-300: #cbd5e1;
   --slate-400: #94a3b8;
+  --slate-600: #475569;
 }
 
 @font-face {
@@ -29,10 +33,21 @@ body {
   src: url('../fonts/OpenSans-Medium.ttf');
 }
 
-#content {
+@font-face {
+  font-family: OpenSans-Light;
+  src: url('../fonts/OpenSans-Light.ttf');
+}
+
+#container {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+}
+
+button,
+input,
+select {
+  font-family: OpenSans-Medium;
 }
 
 .header {
@@ -55,6 +70,11 @@ body {
   width: 55px;
 }
 
+.content {
+  display: flex;
+  flex: 1;
+}
+
 .sidebar {
   display: flex;
   flex-direction: column;
@@ -62,7 +82,7 @@ body {
   max-width: 300px;
   gap: 10px;
   padding: 20px;
-  background: var(--slate-100);
+  background: var(--slate-50);
 }
 
 .inbox-icon,
@@ -84,7 +104,7 @@ body {
 .today-list:hover,
 .projects-container:hover *,
 .addproject-btn:hover {
-  background: var(--slate-200);
+  background: var(--slate-100);
 }
 
 .projects-container {
@@ -100,13 +120,183 @@ body {
   cursor: pointer;
   border: none;
   height: 24px;
-  background: var(--slate-100);
+  background: var(--slate-50);
 }
 
 .projects-container:hover {
-  background: var(--slate-200);
+  background: var(--slate-100);
 }
 
 .addproject-icon {
   width: 24px;
+}
+
+.todolist-container {
+  display: flex;
+  justify-content: center;
+  padding: 50px;
+  flex: 1;
+}
+
+.todolist {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  width: 100%;
+  max-width: 800px;
+}
+
+.project-name {
+  font-weight: 900;
+  font-size: 1.2rem;
+}
+
+.priorityhigh-text,
+.prioritymedium-text,
+.prioritylow-text {
+  font-weight: 600;
+  padding: 8px 0px;
+  border-top: 1px solid var(--slate-100);
+  border-bottom: 1px solid var(--slate-100);
+}
+
+.task-add {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.task-add-btn {
+  display: flex;
+}
+
+.task-add-text {
+  font-size: 0.95rem;
+  color: var(--slate-600);
+}
+
+.task-add:hover * {
+  color: var(--lime-500);
+}
+
+.task-add-icon {
+  width: 20px;
+}
+
+.todo-form {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid var(--slate-300);
+}
+
+.taskname-input,
+.taskdescription-input {
+  padding: 8px 0px;
+  border: none;
+}
+
+.taskname-input:focus,
+.taskdescription-input:focus {
+  outline: none;
+}
+
+.taskname-input {
+  font-size: 1rem;
+}
+
+.duedate-input {
+  cursor: pointer;
+  padding: 2px 5px;
+  border-radius: 5px;
+  border: 1px solid var(--slate-300);
+}
+
+.duedate-input:focus {
+  outline: none;
+}
+
+.taskdetails-container {
+  display: flex;
+  gap: 10px;
+}
+
+.priority-select {
+  cursor: pointer;
+  border-radius: 5px;
+  border: 1px solid var(--slate-300);
+}
+
+.priority-select:focus {
+  outline: none;
+}
+
+.buttons-container {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.cancel-btn {
+  cursor: pointer;
+  padding: 6px 12px;
+  background: var(--slate-100);
+  border-radius: 5px;
+  border: none;
+}
+
+.addtask-btn {
+  cursor: not-allowed;
+  padding: 6px 10px;
+  background: var(--lime-100);
+  border-radius: 5px;
+  border: none;
+}
+
+.valid {
+  background: var(--lime-300);
+  cursor: pointer;
+}
+
+.task {
+  display: flex;
+  border-bottom: 1px solid var(--slate-300);
+  padding: 8px 0px;
+}
+
+.name-container {
+  word-break: break-word;
+}
+
+.desc-container {
+  word-break: break-word;
+  font-size: 0.7rem;
+  color: var(--slate-400);
+}
+
+.taskinfo-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.duedate-container {
+  font-size: 0.9rem;
+}
+
+.checklist-btn {
+  cursor: pointer;
+  display: flex;
+  border: none;
+  background: none;
+}
+
+.checklist-img {
+  width: 20px;
+}
+
+.invisible {
+  display: none;
 }
