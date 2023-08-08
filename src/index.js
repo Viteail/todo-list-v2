@@ -1,7 +1,13 @@
 import { createHeader } from './modules/UI/header';
 import { createSidebar } from './modules/UI/sidebar';
+import { createContent } from './modules/UI/content';
+import { createTodoListContainer } from './modules/UI/todolist';
 
-const content = document.querySelector('#content');
+export let contentElem;
 
-createHeader(content);
-createSidebar(content);
+const container = document.querySelector('#container');
+
+createHeader(container);
+createContent(container);
+createSidebar(contentElem);
+createTodoListContainer(contentElem);

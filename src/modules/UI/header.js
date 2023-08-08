@@ -1,7 +1,7 @@
-export const createHeader = (content) => {
+export const createHeader = (container) => {
   const header = document.createElement('div');
   header.classList.add('header');
-  content.appendChild(header);
+  container.appendChild(header);
   header.appendChild(createIcon());
   header.appendChild(createTitle());
 };
