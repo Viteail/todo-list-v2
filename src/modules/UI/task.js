@@ -1,5 +1,3 @@
-import { appendImg } from '../Functions/checklist';
-
 export const createTask = (args, priority) => {
   const task = document.createElement('div');
   task.classList.add('task');
@@ -25,7 +23,7 @@ const createCheckListBtn = (priority) => {
 const createCheckListImg = (priority) => {
   const checkListImg = document.createElement('img');
   checkListImg.classList.add('checklist-img');
-  checkListImg.src = appendImg(priority);
+  checkListImg.src = `icons/checklist-${priority}.svg`;
   return checkListImg;
 };
 
@@ -56,7 +54,7 @@ const createDescContainer = (desc) => {
 const createDueDateContainer = (dueDate) => {
   const dueDateContainer = document.createElement('div');
   dueDateContainer.classList.add('duedate-container');
-  console.log(dueDate)
+  console.log(dueDate);
   dueDateContainer.textContent = dueDate;
   return dueDateContainer;
 };
