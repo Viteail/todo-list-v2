@@ -18,6 +18,8 @@ export const addTask = () => {
   attachValidClass();
   addTaskBtnElm.addEventListener('click', () => {
     if (!validateForm()) return;
+    if (todoFormElms[2].value === '')
+      todoFormElms[2].value = applyDefaultDate();
     let todo = new Task(
       todoFormElms[0].value,
       todoFormElms[1].value,
@@ -49,5 +51,9 @@ export const emptyTodoFormElms = () => {
 };
 
 const formatDate = (dueDate) => {
-  return format(new Date(dueDate.replace(/-/, ', ')), 'dd-MM-yyyy');
+  return format(new Date(dueDate), 'dd-MM-yyyy');
+};
+
+const applyDefaultDate = () => {
+  return format(new Date(), 'yyyy-MM-dd');
 };
