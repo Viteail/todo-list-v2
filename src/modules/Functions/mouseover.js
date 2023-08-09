@@ -25,3 +25,26 @@ const addMouseEventTask = (task, edit, remove) => {
     remove.classList.add('invisible');
   });
 };
+
+export const showAddProject = (projectsContainer) => {
+  const addProjectBtn = projectsContainer.lastElementChild;
+  projectsContainer.addEventListener('mouseover', () =>
+    addProjectBtn.classList.remove('invisible')
+  );
+  projectsContainer.addEventListener('mouseout', () =>
+    addProjectBtn.classList.add('invisible')
+  );
+  changeImgOnHover(addProjectBtn);
+};
+
+const changeImgOnHover = (addProjectBtn) => {
+  let addProjectImg = addProjectBtn.firstElementChild;
+  addProjectBtn.addEventListener(
+    'mouseover',
+    () => (addProjectImg.src = 'icons/plus-black.svg')
+  );
+  addProjectBtn.addEventListener(
+    'mouseout',
+    () => (addProjectImg.src = 'icons/plus.svg')
+  );
+};

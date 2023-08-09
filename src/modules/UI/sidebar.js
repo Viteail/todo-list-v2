@@ -1,3 +1,5 @@
+import { showAddProject } from '../Functions/mouseover';
+
 export const createSidebar = (content) => {
   const sidebar = document.createElement('div');
   sidebar.classList.add('sidebar');
@@ -70,6 +72,7 @@ const createProjectsContainer = () => {
   projectsContainer.classList.add('projects-container');
   projectsContainer.appendChild(createProjectsText());
   projectsContainer.appendChild(createAddProjectButton());
+  showAddProject(projectsContainer);
   return projectsContainer;
 };
 
@@ -82,7 +85,7 @@ const createProjectsText = () => {
 
 const createAddProjectButton = () => {
   const addProjectBtn = document.createElement('button');
-  addProjectBtn.classList.add('addproject-btn');
+  addProjectBtn.classList.add('addproject-btn', 'invisible');
   addProjectBtn.appendChild(createAddProjectIcon());
   return addProjectBtn;
 };
