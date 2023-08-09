@@ -279,6 +279,7 @@ select {
 .taskinfo-wrapper {
   display: flex;
   flex-direction: column;
+  flex: 1;
   gap: 5px;
 }
 
@@ -295,6 +296,26 @@ select {
 
 .checklist-img {
   width: 20px;
+}
+
+.edit-img, .remove-img {
+  width: 20px;
+}
+
+.edit-btn, .remove-btn {
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 26px;
+  width: 26px;
+  border-radius: 5px;
+  border: none;
+  background: none;
+}
+
+.edit-btn:hover, .remove-btn:hover {
+  background: var(--slate-100);
 }
 
 .invisible {
