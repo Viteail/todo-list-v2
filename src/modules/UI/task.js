@@ -1,8 +1,19 @@
+import {
+  editBtnElm,
+  removeBtnElm,
+  taskElm,
+  showTaskOptions,
+} from '../Functions/mouseover';
+
 export const createTask = (args, priority) => {
   const task = document.createElement('div');
   task.classList.add('task');
   task.appendChild(createCheckListWrapper(priority));
   task.appendChild(createTaskInfoWrapper(args));
+  task.appendChild(createEditContainer());
+  task.appendChild(createRemoveContainer());
+  taskElm = task;
+  showTaskOptions();
   return task;
 };
 
@@ -54,7 +65,50 @@ const createDescContainer = (desc) => {
 const createDueDateContainer = (dueDate) => {
   const dueDateContainer = document.createElement('div');
   dueDateContainer.classList.add('duedate-container');
-  console.log(dueDate);
   dueDateContainer.textContent = dueDate;
   return dueDateContainer;
+};
+
+const createEditContainer = () => {
+  const editContainer = document.createElement('div');
+  editContainer.classList.add('edit-container');
+  editContainer.appendChild(createEditBtn());
+  return editContainer;
+};
+
+const createEditBtn = () => {
+  const editBtn = document.createElement('button');
+  editBtn.classList.add('edit-btn', 'invisible');
+  editBtn.appendChild(createEditImg());
+  editBtnElm = editBtn;
+  return editBtn;
+};
+
+const createEditImg = () => {
+  const editImg = document.createElement('img');
+  editImg.classList.add('edit-img');
+  editImg.src = 'icons/edit.svg';
+  return editImg;
+};
+
+const createRemoveContainer = () => {
+  const removeContainer = document.createElement('div');
+  removeContainer.classList.add('remove-container');
+  removeContainer.appendChild(createRemoveBtn());
+  return removeContainer;
+};
+
+const createRemoveBtn = () => {
+  const removeBtn = document.createElement('button');
+  removeBtn.classList.add('remove-btn', 'invisible');
+  removeBtn.appendChild(createRemoveImg());
+  removeBtnElm = removeBtn;
+  return removeBtn;
+};
+
+const createRemoveImg = () => {
+  const removeImg = document.createElement('img');
+  removeImg.classList.add('remove-img');
+  removeImg.src = 'icons/trash.svg';
+  return removeImg;
 };
