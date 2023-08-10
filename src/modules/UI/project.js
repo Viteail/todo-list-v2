@@ -1,9 +1,13 @@
-export const createProject = (name, color) => {
+import { toggleCurrentProject } from '../Functions/projects';
+
+export const createProject = (lastProject, name, color) => {
   const project = document.createElement('div');
   project.classList.add('project');
   project.appendChild(createColorContainer(color));
   project.appendChild(createNameContainer(name));
   project.appendChild(createRemoveBtn());
+  lastProject.elm = project;
+  toggleCurrentProject(project);
   return project;
 };
 

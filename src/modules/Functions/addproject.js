@@ -17,7 +17,6 @@ export const addProject = (addProjectBtn) => {
     projects.push(project);
     appendProject();
     removeModal();
-    console.log(projects);
   });
 };
 

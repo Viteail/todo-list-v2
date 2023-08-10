@@ -1,5 +1,6 @@
 import { showAddProject } from '../Functions/mouseover';
 import { addProjectEvent } from '../Functions/addproject';
+import { projects, toggleCurrentProject } from '../Functions/projects';
 
 export let projectMenuElm;
 
@@ -24,6 +25,8 @@ const createInbox = () => {
   inbox.classList.add('inbox', 'active-project');
   inbox.appendChild(createInboxIcon());
   inbox.appendChild(createInboxText());
+  projects.push({ name: 'Inbox', tasks: [], elm: inbox });
+  toggleCurrentProject(inbox);
   return inbox;
 };
 
@@ -46,6 +49,8 @@ const createTodayList = () => {
   todayList.classList.add('today-list');
   todayList.appendChild(createTodayIcon());
   todayList.appendChild(createTodayText());
+  projects.push({ name: 'Today', tasks: [], elm: todayList });
+  toggleCurrentProject(todayList);
   return todayList;
 };
 
