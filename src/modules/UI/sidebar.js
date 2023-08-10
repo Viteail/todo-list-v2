@@ -1,11 +1,14 @@
 import { showAddProject } from '../Functions/mouseover';
+import { addProjectEvent } from '../Functions/addproject';
+
+export let projectMenuElm;
 
 export const createSidebar = (content) => {
   const sidebar = document.createElement('div');
   sidebar.classList.add('sidebar');
   content.appendChild(sidebar);
   sidebar.appendChild(createTopMenu());
-  sidebar.appendChild(createProjectMenu());
+  sidebar.appendChild(createProjectMenu(content));
 };
 
 const createTopMenu = () => {
@@ -18,7 +21,7 @@ const createTopMenu = () => {
 
 const createInbox = () => {
   const inbox = document.createElement('div');
-  inbox.classList.add('inbox');
+  inbox.classList.add('inbox', 'active-project');
   inbox.appendChild(createInboxIcon());
   inbox.appendChild(createInboxText());
   return inbox;
@@ -60,18 +63,19 @@ const createTodayText = () => {
   return todayText;
 };
 
-const createProjectMenu = () => {
+const createProjectMenu = (content) => {
   const projectMenu = document.createElement('div');
   projectMenu.classList.add('project-menu');
-  projectMenu.appendChild(createProjectsContainer());
+  projectMenu.appendChild(createProjectsContainer(content));
+  projectMenuElm = projectMenu;
   return projectMenu;
 };
 
-const createProjectsContainer = () => {
+const createProjectsContainer = (content) => {
   const projectsContainer = document.createElement('div');
   projectsContainer.classList.add('projects-container');
   projectsContainer.appendChild(createProjectsText());
-  projectsContainer.appendChild(createAddProjectButton());
+  projectsContainer.appendChild(createAddProjectButton(content));
   showAddProject(projectsContainer);
   return projectsContainer;
 };
@@ -83,10 +87,11 @@ const createProjectsText = () => {
   return projectsText;
 };
 
-const createAddProjectButton = () => {
+const createAddProjectButton = (content) => {
   const addProjectBtn = document.createElement('button');
   addProjectBtn.classList.add('addproject-btn', 'invisible');
   addProjectBtn.appendChild(createAddProjectIcon());
+  addProjectEvent(addProjectBtn, content.parentElement);
   return addProjectBtn;
 };
 
