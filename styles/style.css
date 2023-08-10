@@ -350,7 +350,7 @@ select {
   min-height: 50%;
   min-width: 20%;
   background: var(--white);
-  animation: appear 200ms linear;
+  animation: appear 200ms ease;
 }
 
 .header-modal {
@@ -460,7 +460,7 @@ select {
 }
 
 .color-div {
-  padding: 5px;
+  padding: 4px;
   border-radius: 50%;
 }
 
