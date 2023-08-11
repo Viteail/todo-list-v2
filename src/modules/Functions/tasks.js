@@ -1,5 +1,7 @@
 import { createTask } from '../UI/task';
-import { todoListElm } from './cancel';
+import { todoListElm } from '../UI/todolist';
+import { currentProject } from './projects';
+import { createAddTask } from '../UI/taskAdder';
 
 export class Task {
   constructor(name, desc, dueDate, priority) {
@@ -13,7 +15,7 @@ export class Task {
 export let tasks = [];
 
 export const loadTasks = () => {
-  tasks.forEach((task) =>
+  currentProject.tasks.forEach((task) =>
     todoListElm.appendChild(
       createTask(
         {
@@ -25,10 +27,11 @@ export const loadTasks = () => {
       )
     )
   );
+  todoListElm.appendChild(createAddTask());
 };
 
 export const appendTask = () => {
-  let lastTask = tasks[tasks.length - 1];
+  let lastTask = currentProject.tasks[currentProject.tasks.length - 1];
   todoListElm.appendChild(
     createTask(
       {
@@ -39,4 +42,10 @@ export const appendTask = () => {
       lastTask.priority
     )
   );
+};
+
+export const removeTaskAdder = () => {
+  for (const elm of todoListElm.childNodes) {
+    if (elm.classList.contains('task-add')) elm.remove();
+  }
 };

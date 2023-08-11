@@ -1,5 +1,5 @@
 import { projectName, projectColor, addProject } from '../Functions/addproject';
-import { cancelModal, addWindowEvent } from '../Functions/cancel';
+import { cancelModal, addWindowEvent } from '../Functions/remove';
 
 export let modalElm;
 

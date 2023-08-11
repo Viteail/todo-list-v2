@@ -1,4 +1,4 @@
-import { cancelTodoForm, todoFormElm, todoListElm } from '../Functions/cancel';
+import { cancelTodoForm, todoFormElm, todoListElm } from '../Functions/remove';
 import { addTask, addTaskBtnElm, todoFormElms } from '../Functions/addtask';
 
 export const createTodoForm = (todoList) => {

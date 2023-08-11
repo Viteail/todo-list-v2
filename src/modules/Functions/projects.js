@@ -1,5 +1,8 @@
 import { projectMenuElm } from '../UI/sidebar';
 import { createProject } from '../UI/project';
+import { removeTaskAdder, loadTasks } from './Tasks';
+import { todoListContainerElm, createTodoList } from '../UI/todolist';
+import { removeTodoList } from './remove';
 
 export class Project {
   constructor(name, color) {
@@ -12,7 +15,7 @@ export class Project {
 
 export let projects = [];
 
-export let currentProject = projects[0];
+export let currentProject;
 
 export const appendProject = () => {
   let lastProject = projects[projects.length - 1];
@@ -27,6 +30,10 @@ export const toggleCurrentProject = (project) => {
     currentProject = projects.filter((item) => project === item.elm);
     currentProject = currentProject[0];
     attachActiveProject();
+    removeTodoList();
+    todoListContainerElm.appendChild(createTodoList());
+    removeTaskAdder();
+    loadTasks();
     console.log(currentProject);
   });
 };

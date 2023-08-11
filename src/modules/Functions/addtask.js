@@ -1,7 +1,8 @@
 import { createTodoForm } from '../UI/todoForm';
-import { removeTodoForm } from './cancel';
+import { removeTodoForm } from './remove';
 import { Task, tasks, appendTask } from './Tasks';
 import format from 'date-fns/format';
+import { currentProject } from './projects';
 
 export const addTaskEvent = (taskAdder) => {
   taskAdder.addEventListener('click', () => {
@@ -26,7 +27,8 @@ export const addTask = () => {
       formatDate(todoFormElms[2].value),
       todoFormElms[3].value
     );
-    tasks.push(todo);
+    console.log(currentProject)
+    currentProject.tasks.push(todo);
     appendTask();
     removeTodoForm();
     emptyTodoFormElms();

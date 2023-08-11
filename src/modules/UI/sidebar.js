@@ -1,6 +1,10 @@
 import { showAddProject } from '../Functions/mouseover';
 import { addProjectEvent } from '../Functions/addproject';
-import { projects, toggleCurrentProject } from '../Functions/projects';
+import {
+  projects,
+  toggleCurrentProject,
+  currentProject,
+} from '../Functions/projects';
 
 export let projectMenuElm;
 
@@ -27,6 +31,7 @@ const createInbox = () => {
   inbox.appendChild(createInboxText());
   projects.push({ name: 'Inbox', tasks: [], elm: inbox });
   toggleCurrentProject(inbox);
+  currentProject = projects[0];
   return inbox;
 };
 

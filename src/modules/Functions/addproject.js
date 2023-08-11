@@ -1,5 +1,5 @@
 import { createModal } from '../UI/modal';
-import { removeModal } from './cancel';
+import { removeModal } from './remove';
 import { Project, projects, appendProject } from './projects';
 
 export let projectName;

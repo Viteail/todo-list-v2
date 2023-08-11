@@ -1,7 +1,8 @@
 import { createAddTask } from '../UI/taskAdder';
 import { modalElm } from '../UI/modal';
+import { todoListElm } from '../UI/todolist';
+import { emptyTodoFormElms } from './addtask';
 
-export let todoListElm;
 export let todoFormElm;
 
 export const cancelTodoForm = (btn) => {
@@ -10,6 +11,7 @@ export const cancelTodoForm = (btn) => {
 
 export const removeTodoForm = () => {
   todoListElm.appendChild(createAddTask());
+  emptyTodoFormElms();
   todoFormElm.remove();
 };
 
@@ -27,4 +29,8 @@ export const addWindowEvent = () => {
 
 export const removeModal = () => {
   modalElm.remove();
+};
+
+export const removeTodoList = () => {
+  todoListElm.remove();
 };
