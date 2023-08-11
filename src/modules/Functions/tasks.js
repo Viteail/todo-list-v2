@@ -9,10 +9,9 @@ export class Task {
     this.desc = desc;
     this.dueDate = dueDate;
     this.priority = priority;
+    this.elm = '';
   }
 }
-
-export let tasks = [];
 
 export const loadTasks = () => {
   currentProject.tasks.forEach((task) =>
@@ -23,7 +22,8 @@ export const loadTasks = () => {
           desc: task.desc,
           dueDate: task.dueDate,
         },
-        task.priority
+        task.priority,
+        task
       )
     )
   );
@@ -39,7 +39,8 @@ export const appendTask = () => {
         desc: lastTask.desc,
         dueDate: lastTask.dueDate,
       },
-      lastTask.priority
+      lastTask.priority,
+      lastTask
     )
   );
 };

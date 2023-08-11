@@ -5,15 +5,18 @@ import {
   showTaskOptions,
 } from '../Functions/mouseover';
 
-export const createTask = (args, priority) => {
+import { attachEventRemoveTask } from '../Functions/remove';
+
+export const createTask = (args, priority, lastTask) => {
   const task = document.createElement('div');
   task.classList.add('task');
   task.appendChild(createCheckListWrapper(priority));
   task.appendChild(createTaskInfoWrapper(args));
   task.appendChild(createEditContainer());
-  task.appendChild(createRemoveContainer());
+  task.appendChild(createRemoveContainer(task));
   taskElm = task;
   showTaskOptions();
+  lastTask.elm = task;
   return task;
 };
 
@@ -91,18 +94,19 @@ const createEditImg = () => {
   return editImg;
 };
 
-const createRemoveContainer = () => {
+const createRemoveContainer = (taskElm) => {
   const removeContainer = document.createElement('div');
   removeContainer.classList.add('remove-container');
-  removeContainer.appendChild(createRemoveBtn());
+  removeContainer.appendChild(createRemoveBtn(taskElm));
   return removeContainer;
 };
 
-const createRemoveBtn = () => {
+const createRemoveBtn = (taskElm) => {
   const removeBtn = document.createElement('button');
   removeBtn.classList.add('remove-btn', 'invisible');
   removeBtn.appendChild(createRemoveImg());
   removeBtnElm = removeBtn;
+  attachEventRemoveTask(removeBtn, taskElm);
   return removeBtn;
 };
 

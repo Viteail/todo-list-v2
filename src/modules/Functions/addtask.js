@@ -1,6 +1,6 @@
 import { createTodoForm } from '../UI/todoForm';
 import { removeTodoForm } from './remove';
-import { Task, tasks, appendTask } from './Tasks';
+import { Task, appendTask } from './Tasks';
 import format from 'date-fns/format';
 import { currentProject } from './projects';
 
