@@ -1,13 +1,13 @@
 export let taskOptionsDOM = [];
 export let editBtnElm;
-export let removeBtnElm;
+export let removeTaskBtnElm;
 export let taskElm;
 
 export const showTaskOptions = () => {
   taskOptionsDOM.push({
     task: taskElm,
     edit: editBtnElm,
-    remove: removeBtnElm,
+    remove: removeTaskBtnElm,
   });
 
   taskOptionsDOM.forEach((item) =>
@@ -27,6 +27,8 @@ const addMouseEventTask = (task, edit, remove) => {
 };
 
 export const showAddProject = (projectsContainer) => {
+  let firstImg = 'icons/plus-black.svg';
+  let secondImg = 'icons/plus.svg';
   const addProjectBtn = projectsContainer.lastElementChild;
   projectsContainer.addEventListener('mouseover', () =>
     addProjectBtn.classList.remove('invisible')
@@ -34,17 +36,24 @@ export const showAddProject = (projectsContainer) => {
   projectsContainer.addEventListener('mouseout', () =>
     addProjectBtn.classList.add('invisible')
   );
-  changeImgOnHover(addProjectBtn);
+  changeImgOnHover(addProjectBtn, firstImg, secondImg);
 };
 
-const changeImgOnHover = (addProjectBtn) => {
-  let addProjectImg = addProjectBtn.firstElementChild;
-  addProjectBtn.addEventListener(
-    'mouseover',
-    () => (addProjectImg.src = 'icons/plus-black.svg')
+export const showRemoveBtnProject = (project) => {
+  let firstImg = 'icons/delete-black.svg';
+  let secondImg = 'icons/delete.svg';
+  const removeBtn = project.lastElementChild;
+  project.addEventListener('mouseover', () =>
+    removeBtn.classList.remove('invisible')
   );
-  addProjectBtn.addEventListener(
-    'mouseout',
-    () => (addProjectImg.src = 'icons/plus.svg')
+  project.addEventListener('mouseout', () =>
+    removeBtn.classList.add('invisible')
   );
+  changeImgOnHover(removeBtn, firstImg, secondImg);
+};
+
+const changeImgOnHover = (btn, firstImg, secondImg) => {
+  let img = btn.firstElementChild;
+  btn.addEventListener('mouseover', () => (img.src = firstImg));
+  btn.addEventListener('mouseout', () => (img.src = secondImg));
 };

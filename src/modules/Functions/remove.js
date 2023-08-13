@@ -2,7 +2,7 @@ import { createAddTask } from '../UI/taskAdder';
 import { modalElm } from '../UI/modal';
 import { todoListElm } from '../UI/todolist';
 import { emptyTodoFormElms } from './addtask';
-import { currentProject } from './projects';
+import { currentProject, projects, setDefaultProject } from './projects';
 
 export let todoFormElm;
 
@@ -41,12 +41,24 @@ export const attachEventRemoveTask = (btn, taskElm) => {
     currentProject.tasks.forEach((task, index) => {
       if (task.elm === taskElm) {
         currentProject.tasks.splice(index, 1);
-        removeTaskDOM(taskElm);
+        removeElm(taskElm);
       }
     });
   });
 };
 
-const removeTaskDOM = (taskElm) => {
-  taskElm.remove();
+export const attachEventRemoveProject = (btn, projectElm) => {
+  btn.addEventListener('click', () => {
+    projects.forEach((project, index) => {
+      if (project.elm === projectElm) {
+        projects.splice(index, 1);
+        setDefaultProject(projectElm);
+        removeElm(projectElm);
+      }
+    });
+  });
+};
+
+const removeElm = (elm) => {
+  elm.remove();
 };

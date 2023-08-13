@@ -26,19 +26,32 @@ export const appendProject = () => {
 
 export const toggleCurrentProject = (project) => {
   project.addEventListener('click', () => {
-    if (project.classList.contains('active-project')) return;
+    if (
+      project.classList.contains('active-project') ||
+      projects.filter((item) => project === item.elm).length === 0
+    )
+      return;
     currentProject = projects.filter((item) => project === item.elm);
     currentProject = currentProject[0];
-    attachActiveProject();
-    removeTodoList();
-    todoListContainerElm.appendChild(createTodoList());
-    removeTaskAdder();
-    loadTasks();
-    console.log(currentProject);
+    loadProjectContent();
   });
+};
+
+export const setDefaultProject = (project) => {
+  if (currentProject.elm !== project) return;
+  currentProject = projects[0];
+  loadProjectContent();
 };
 
 const attachActiveProject = () => {
   projects.forEach((project) => project.elm.classList.remove('active-project'));
   currentProject.elm.classList.add('active-project');
+};
+
+const loadProjectContent = () => {
+  attachActiveProject();
+  removeTodoList();
+  todoListContainerElm.appendChild(createTodoList());
+  removeTaskAdder();
+  loadTasks();
 };

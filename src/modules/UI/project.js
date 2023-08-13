@@ -1,13 +1,16 @@
 import { toggleCurrentProject } from '../Functions/projects';
+import { showRemoveBtnProject } from '../Functions/mouseover';
+import { attachEventRemoveProject } from '../Functions/remove';
 
 export const createProject = (lastProject, name, color) => {
   const project = document.createElement('div');
   project.classList.add('project');
   project.appendChild(createColorContainer(color));
   project.appendChild(createNameContainer(name));
-  project.appendChild(createRemoveBtn());
+  project.appendChild(createRemoveBtn(project));
   lastProject.elm = project;
   toggleCurrentProject(project);
+  showRemoveBtnProject(project);
   return project;
 };
 
@@ -32,10 +35,11 @@ const createNameContainer = (name) => {
   return nameContainer;
 };
 
-const createRemoveBtn = () => {
+const createRemoveBtn = (project) => {
   const removeBtn = document.createElement('button');
-  removeBtn.classList.add('project-remove-btn');
+  removeBtn.classList.add('project-remove-btn', 'invisible');
   removeBtn.appendChild(createRemoveImg());
+  attachEventRemoveProject(removeBtn, project);
   return removeBtn;
 };
 

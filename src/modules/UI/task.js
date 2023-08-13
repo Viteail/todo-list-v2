@@ -1,6 +1,6 @@
 import {
   editBtnElm,
-  removeBtnElm,
+  removeTaskBtnElm,
   taskElm,
   showTaskOptions,
 } from '../Functions/mouseover';
@@ -105,7 +105,7 @@ const createRemoveBtn = (taskElm) => {
   const removeBtn = document.createElement('button');
   removeBtn.classList.add('remove-btn', 'invisible');
   removeBtn.appendChild(createRemoveImg());
-  removeBtnElm = removeBtn;
+  removeTaskBtnElm = removeBtn;
   attachEventRemoveTask(removeBtn, taskElm);
   return removeBtn;
 };
