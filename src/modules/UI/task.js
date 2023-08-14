@@ -1,11 +1,14 @@
 import {
-  editBtnElm,
-  removeTaskBtnElm,
-  taskElm,
   showTaskOptions,
+  addEventEditBtn,
+  addEventRemoveBtn,
 } from '../Functions/mouseover';
 
 import { attachEventRemoveTask } from '../Functions/remove';
+
+export let editBtnElm;
+export let removeTaskBtnElm;
+export let taskElm;
 
 export const createTask = (args, priority, lastTask) => {
   const task = document.createElement('div');
@@ -84,6 +87,7 @@ const createEditBtn = () => {
   editBtn.classList.add('edit-btn', 'invisible');
   editBtn.appendChild(createEditImg());
   editBtnElm = editBtn;
+  addEventEditBtn(editBtn);
   return editBtn;
 };
 
@@ -107,6 +111,7 @@ const createRemoveBtn = (taskElm) => {
   removeBtn.appendChild(createRemoveImg());
   removeTaskBtnElm = removeBtn;
   attachEventRemoveTask(removeBtn, taskElm);
+  addEventRemoveBtn(removeBtn);
   return removeBtn;
 };
 

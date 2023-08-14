@@ -189,7 +189,6 @@ select {
 .todo-form {
   display: flex;
   flex-direction: column;
-  padding: 10px;
   border-radius: 10px;
   border: 1px solid var(--slate-300);
 }
@@ -205,8 +204,14 @@ select {
   outline: none;
 }
 
+.taskdescription-input {
+  padding: 0px 10px 10px 10px;
+}
+
 .taskname-input {
   font-size: 1rem;
+  margin: 0px 10px;
+  padding: 10px 0px 10px;
 }
 
 .duedate-input {
@@ -223,6 +228,7 @@ select {
 .taskdetails-container {
   display: flex;
   gap: 10px;
+  padding: 10px;
 }
 
 .priority-select {
@@ -239,6 +245,8 @@ select {
   display: flex;
   justify-content: flex-end;
   gap: 10px;
+  padding: 10px;
+  border-top: 1px solid var(--slate-150);
 }
 
 .cancel-btn {

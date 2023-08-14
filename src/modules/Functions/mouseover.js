@@ -1,9 +1,7 @@
-export let taskOptionsDOM = [];
-export let editBtnElm;
-export let removeTaskBtnElm;
-export let taskElm;
+import { taskElm, editBtnElm, removeTaskBtnElm } from '../UI/task';
 
 export const showTaskOptions = () => {
+  let taskOptionsDOM = [];
   taskOptionsDOM.push({
     task: taskElm,
     edit: editBtnElm,
@@ -49,6 +47,18 @@ export const showRemoveBtnProject = (project) => {
   project.addEventListener('mouseout', () =>
     removeBtn.classList.add('invisible')
   );
+  changeImgOnHover(removeBtn, firstImg, secondImg);
+};
+
+export const addEventEditBtn = (editBtn) => {
+  let firstImg = 'icons/edit-black.svg';
+  let secondImg = 'icons/edit.svg';
+  changeImgOnHover(editBtn, firstImg, secondImg);
+};
+
+export const addEventRemoveBtn = (removeBtn) => {
+  let firstImg = 'icons/trash-red.svg';
+  let secondImg = 'icons/trash.svg';
   changeImgOnHover(removeBtn, firstImg, secondImg);
 };
 
