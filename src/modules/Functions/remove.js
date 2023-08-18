@@ -8,12 +8,14 @@ import { editedTaskObj } from './edit';
 import { appendEditedTask } from './Tasks';
 
 export const cancelTodoForm = (btn, isEdit) => {
-  btn.addEventListener('click', () => removeTodoForm(isEdit));
+  btn.addEventListener('click', () => {
+    if (isEdit) appendEditedTask(editedTaskObj);
+    removeTodoForm(isEdit);
+  });
 };
 
 export const removeTodoForm = (isEdit) => {
   if (!isEdit) todoListElm.appendChild(createAddTask());
-  if (isEdit) appendEditedTask(editedTaskObj);
   emptyTodoFormElms();
   todoFormElm.remove();
 };

@@ -64,12 +64,34 @@ export const addEventRemoveBtn = (removeBtn) => {
 };
 
 export const addEventCheckListBtn = (checkListBtn, priority) => {
+  let firstImg;
+  let secondImg;
   if (priority === 'low') {
+    firstImg = 'icons/checklist-low-hover.svg';
+    secondImg = 'icons/checklist-low.svg';
+  } else if (priority === 'medium') {
+    firstImg = 'icons/checklist-medium-hover.svg';
+    secondImg = 'icons/checklist-medium.svg';
+  } else if (priority === 'high') {
+    firstImg = 'icons/checklist-high-hover.svg';
+    secondImg = 'icons/checklist-high.svg';
   }
+  changeImgOnHover(checkListBtn, firstImg, secondImg);
+  showCheckImg(checkListBtn);
+};
+
+const showCheckImg = (checkListBtn) => {
+  const checkImg = checkListBtn.lastElementChild;
+  checkListBtn.addEventListener('mouseover', () =>
+    checkImg.classList.remove('invisible')
+  );
+  checkListBtn.addEventListener('mouseout', () =>
+    checkImg.classList.add('invisible')
+  );
 };
 
 const changeImgOnHover = (btn, firstImg, secondImg) => {
-  let img = btn.firstElementChild;
+  const img = btn.firstElementChild;
   btn.addEventListener('mouseover', () => (img.src = firstImg));
   btn.addEventListener('mouseout', () => (img.src = secondImg));
 };

@@ -2,10 +2,11 @@ import {
   showTaskOptions,
   addEventEditBtn,
   addEventRemoveBtn,
+  addEventCheckListBtn,
 } from '../Functions/mouseover';
-
 import { attachEventRemoveTask } from '../Functions/remove';
 import { editTask } from '../Functions/edit';
+import { addCheckListEvent } from '../Functions/checklist';
 
 export let editBtnElm;
 export let removeTaskBtnElm;
@@ -22,6 +23,7 @@ export const createTask = (args, priority, taskObj) => {
   showTaskOptions();
   taskObj.elm = task;
   editTask();
+  addCheckListEvent();
   return task;
 };
 
@@ -36,7 +38,9 @@ const createCheckListBtn = (priority, taskObj) => {
   const checkListBtn = document.createElement('button');
   checkListBtn.classList.add('checklist-btn');
   checkListBtn.appendChild(createCheckListImg(priority));
+  checkListBtn.appendChild(createCheckImg(priority));
   taskObj.checklist = checkListBtn;
+  addEventCheckListBtn(checkListBtn, priority);
   return checkListBtn;
 };
 
@@ -45,6 +49,13 @@ const createCheckListImg = (priority) => {
   checkListImg.classList.add('checklist-img');
   checkListImg.src = `icons/checklist-${priority}.svg`;
   return checkListImg;
+};
+
+const createCheckImg = (priority) => {
+  const checkImg = document.createElement('img');
+  checkImg.classList.add('check-img', 'invisible');
+  checkImg.src = `icons/check-${priority}.svg`;
+  return checkImg;
 };
 
 const createTaskInfoWrapper = (args) => {
