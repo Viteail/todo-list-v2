@@ -22,9 +22,12 @@ body {
   --slate-200: #e2e8f0;
   --slate-300: #cbd5e1;
   --slate-400: #94a3b8;
+  --slate-500: #64748b;
   --slate-600: #475569;
   --slate-700: #334155;
   --slate-400-rgba: rgba(148, 163, 184, 0.6);
+  --blue-500: #1aa7ff;
+  --red-600: #f82020;
 }
 
 @font-face {
@@ -302,6 +305,7 @@ select {
 }
 
 .checklist-btn {
+  position: relative;
   cursor: pointer;
   display: flex;
   border: none;
@@ -310,6 +314,7 @@ select {
 
 .checklist-img {
   width: 20px;
+  border-radius: 50%;
 }
 
 .edit-img,
@@ -479,6 +484,27 @@ select {
   flex: 1;
 }
 
+.check-img {
+  position: absolute;
+  width: 15px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: show 100ms linear;
+}
+
+.low {
+  background: var(--slate-500);
+}
+
+.medium {
+  background: var(--blue-500);
+}
+
+.high {
+  background: var(--red-600);
+}
+
 .valid {
   color: var(--slate-700);
   background: var(--lime-300);
@@ -495,5 +521,29 @@ select {
   }
   to {
     transform: scale(1);
+  }
+}
+
+@keyframes show {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes check {
+  0% {
+    opacity: 0;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+  100% {
+    opacity: 0.5;
+    transform: scale(1.2);
   }
 }
