@@ -26,8 +26,8 @@ const addMouseEventTask = (task, edit, remove) => {
 };
 
 export const showAddProject = (projectsContainer) => {
-  let firstImg = 'icons/plus-black.svg';
-  let secondImg = 'icons/plus.svg';
+  const firstImg = 'icons/plus-black.svg';
+  const secondImg = 'icons/plus.svg';
   const addProjectBtn = projectsContainer.lastElementChild;
   projectsContainer.addEventListener('mouseover', () =>
     addProjectBtn.classList.remove('invisible')
@@ -39,8 +39,8 @@ export const showAddProject = (projectsContainer) => {
 };
 
 export const showRemoveBtnProject = (project) => {
-  let firstImg = 'icons/delete-black.svg';
-  let secondImg = 'icons/delete.svg';
+  const firstImg = 'icons/delete-black.svg';
+  const secondImg = 'icons/delete.svg';
   const removeBtn = project.lastElementChild;
   project.addEventListener('mouseover', () =>
     removeBtn.classList.remove('invisible')
@@ -52,15 +52,20 @@ export const showRemoveBtnProject = (project) => {
 };
 
 export const addEventEditBtn = (editBtn) => {
-  let firstImg = 'icons/edit-black.svg';
-  let secondImg = 'icons/edit.svg';
+  const firstImg = 'icons/edit-black.svg';
+  const secondImg = 'icons/edit.svg';
   changeImgOnHover(editBtn, firstImg, secondImg);
 };
 
 export const addEventRemoveBtn = (removeBtn) => {
-  let firstImg = 'icons/trash-red.svg';
-  let secondImg = 'icons/trash.svg';
+  const firstImg = 'icons/trash-red.svg';
+  const secondImg = 'icons/trash.svg';
   changeImgOnHover(removeBtn, firstImg, secondImg);
+};
+
+export const addEventCheckListBtn = (checkListBtn, priority) => {
+  if (priority === 'low') {
+  }
 };
 
 const changeImgOnHover = (btn, firstImg, secondImg) => {

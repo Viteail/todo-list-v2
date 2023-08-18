@@ -11,6 +11,7 @@ export class Task {
     this.dueDate = dueDate;
     this.priority = priority;
     this.elm = '';
+    this.checklist = '';
   }
 }
 

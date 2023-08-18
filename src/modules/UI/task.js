@@ -14,7 +14,7 @@ export let taskElm;
 export const createTask = (args, priority, taskObj) => {
   const task = document.createElement('div');
   task.classList.add('task');
-  task.appendChild(createCheckListWrapper(priority));
+  task.appendChild(createCheckListWrapper(priority, taskObj));
   task.appendChild(createTaskInfoWrapper(args));
   task.appendChild(createEditContainer());
   task.appendChild(createRemoveContainer(task));
@@ -25,17 +25,18 @@ export const createTask = (args, priority, taskObj) => {
   return task;
 };
 
-const createCheckListWrapper = (priority) => {
+const createCheckListWrapper = (priority, taskObj) => {
   const checkListWrapper = document.createElement('div');
   checkListWrapper.classList.add('checklist-wrapper');
-  checkListWrapper.appendChild(createCheckListBtn(priority));
+  checkListWrapper.appendChild(createCheckListBtn(priority, taskObj));
   return checkListWrapper;
 };
 
-const createCheckListBtn = (priority) => {
+const createCheckListBtn = (priority, taskObj) => {
   const checkListBtn = document.createElement('button');
   checkListBtn.classList.add('checklist-btn');
   checkListBtn.appendChild(createCheckListImg(priority));
+  taskObj.checklist = checkListBtn;
   return checkListBtn;
 };
 

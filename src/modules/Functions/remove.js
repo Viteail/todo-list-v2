@@ -4,6 +4,8 @@ import { todoListElm } from '../UI/todolist';
 import { emptyTodoFormElms } from './addtask';
 import { currentProject, projects, setDefaultProject } from './projects';
 import { todoFormElm } from '../UI/todoForm';
+import { editedTaskObj } from './edit';
+import { appendEditedTask } from './Tasks';
 
 export const cancelTodoForm = (btn, isEdit) => {
   btn.addEventListener('click', () => removeTodoForm(isEdit));
@@ -11,6 +13,7 @@ export const cancelTodoForm = (btn, isEdit) => {
 
 export const removeTodoForm = (isEdit) => {
   if (!isEdit) todoListElm.appendChild(createAddTask());
+  if (isEdit) appendEditedTask(editedTaskObj);
   emptyTodoFormElms();
   todoFormElm.remove();
 };

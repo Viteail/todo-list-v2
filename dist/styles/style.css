@@ -354,8 +354,8 @@ select {
   display: flex;
   flex-direction: column;
   border-radius: 15px;
-  min-height: 50%;
-  min-width: 20%;
+  min-height: 300px;
+  min-width: 250px;
   background: var(--white);
   animation: appear 200ms ease;
 }
