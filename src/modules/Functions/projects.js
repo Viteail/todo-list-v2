@@ -3,6 +3,7 @@ import { createProject } from '../UI/project';
 import { removeTaskAdder, loadTasks } from './Tasks';
 import { todoListContainerElm, createTodoList } from '../UI/todolist';
 import { removeTodoList } from './remove';
+import { emptyTodoFormElms } from './addtask';
 
 export class Project {
   constructor(name, color) {
@@ -54,4 +55,5 @@ const loadProjectContent = () => {
   todoListContainerElm.appendChild(createTodoList());
   removeTaskAdder();
   loadTasks();
+  emptyTodoFormElms();
 };

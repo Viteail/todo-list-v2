@@ -3,10 +3,12 @@ import { removeTodoForm } from './remove';
 import { Task, appendTask } from './Tasks';
 import format from 'date-fns/format';
 import { currentProject } from './projects';
+import { isEdit } from './edit';
 
 export const addTaskEvent = (taskAdder) => {
   taskAdder.addEventListener('click', () => {
-    createTodoForm(taskAdder.parentElement);
+    isEdit = false;
+    taskAdder.parentElement.appendChild(createTodoForm(isEdit));
     taskAdder.remove();
   });
 };
@@ -15,10 +17,11 @@ export let todoFormElms = [];
 
 export let addTaskBtnElm;
 
-export const addTask = () => {
-  attachValidClass();
+export const addTask = (isEdit) => {
+  if (isEdit) return;
+  attachValidClass(isEdit);
   addTaskBtnElm.addEventListener('click', () => {
-    if (!validateForm()) return;
+    if (!validateForm() || isEdit) return;
     if (todoFormElms[2].value === '')
       todoFormElms[2].value = applyDefaultDate();
     let todo = new Task(
@@ -27,20 +30,20 @@ export const addTask = () => {
       formatDate(todoFormElms[2].value),
       todoFormElms[3].value
     );
-    console.log(currentProject)
     currentProject.tasks.push(todo);
     appendTask();
-    removeTodoForm();
+    removeTodoForm(isEdit);
     emptyTodoFormElms();
   });
 };
 
-const validateForm = () => {
+export const validateForm = () => {
   if (todoFormElms[0].value === '') return false;
   return true;
 };
 
-const attachValidClass = () => {
+export const attachValidClass = (isEdit) => {
+  if (isEdit) addTaskBtnElm.classList.add('valid');
   todoFormElms[0].addEventListener('input', () =>
     todoFormElms[0].value !== ''
       ? addTaskBtnElm.classList.add('valid')
@@ -52,7 +55,7 @@ export const emptyTodoFormElms = () => {
   todoFormElms = [];
 };
 
-const formatDate = (dueDate) => {
+export const formatDate = (dueDate) => {
   return format(new Date(dueDate), 'dd-MM-yyyy');
 };
 

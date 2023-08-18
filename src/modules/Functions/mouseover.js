@@ -1,7 +1,8 @@
 import { taskElm, editBtnElm, removeTaskBtnElm } from '../UI/task';
 
+export let taskOptionsDOM = [];
+
 export const showTaskOptions = () => {
-  let taskOptionsDOM = [];
   taskOptionsDOM.push({
     task: taskElm,
     edit: editBtnElm,

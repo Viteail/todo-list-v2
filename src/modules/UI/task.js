@@ -5,12 +5,13 @@ import {
 } from '../Functions/mouseover';
 
 import { attachEventRemoveTask } from '../Functions/remove';
+import { editTask } from '../Functions/edit';
 
 export let editBtnElm;
 export let removeTaskBtnElm;
 export let taskElm;
 
-export const createTask = (args, priority, lastTask) => {
+export const createTask = (args, priority, taskObj) => {
   const task = document.createElement('div');
   task.classList.add('task');
   task.appendChild(createCheckListWrapper(priority));
@@ -19,7 +20,8 @@ export const createTask = (args, priority, lastTask) => {
   task.appendChild(createRemoveContainer(task));
   taskElm = task;
   showTaskOptions();
-  lastTask.elm = task;
+  taskObj.elm = task;
+  editTask();
   return task;
 };
 

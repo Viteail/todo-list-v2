@@ -1,16 +1,22 @@
-import { cancelTodoForm, todoFormElm, todoListElm } from '../Functions/remove';
-import { addTask, addTaskBtnElm, todoFormElms } from '../Functions/addtask';
+import { cancelTodoForm } from '../Functions/remove';
+import {
+  addTask,
+  addTaskBtnElm,
+  todoFormElms,
+} from '../Functions/addtask';
+import { saveTask } from '../Functions/edit';
 
-export const createTodoForm = (todoList) => {
+export let todoFormElm;
+
+export const createTodoForm = (isEdit) => {
   const todoForm = document.createElement('div');
   todoForm.classList.add('todo-form');
-  todoList.appendChild(todoForm);
-  todoListElm = todoList;
   todoFormElm = todoForm;
   todoForm.appendChild(createTaskNameInput());
   todoForm.appendChild(createTaskDescriptionInput());
   todoForm.appendChild(createTaskDetailsContainer());
-  todoForm.appendChild(createButtonsContainer());
+  todoForm.appendChild(createButtonsContainer(isEdit));
+  return todoForm;
 };
 
 const createTaskNameInput = () => {
@@ -18,6 +24,7 @@ const createTaskNameInput = () => {
   taskNameInput.classList.add('taskname-input');
   taskNameInput.placeholder = 'Task name';
   todoFormElms.push(taskNameInput);
+  console.log(todoFormElms);
   return taskNameInput;
 };
 
@@ -68,27 +75,29 @@ const createPrioritySelect = () => {
   return prioritySelect;
 };
 
-const createButtonsContainer = () => {
+const createButtonsContainer = (isEdit) => {
   const buttonsContainer = document.createElement('div');
   buttonsContainer.classList.add('buttons-container');
-  buttonsContainer.appendChild(createCancelBtn());
-  buttonsContainer.appendChild(createAddTaskBtn());
+  buttonsContainer.appendChild(createCancelBtn(isEdit));
+  buttonsContainer.appendChild(createAddTaskBtn(isEdit));
   return buttonsContainer;
 };
 
-const createCancelBtn = () => {
+const createCancelBtn = (isEdit) => {
   const cancelBtn = document.createElement('button');
   cancelBtn.classList.add('cancel-btn');
   cancelBtn.textContent = 'Cancel';
-  cancelTodoForm(cancelBtn);
+  cancelTodoForm(cancelBtn, isEdit);
   return cancelBtn;
 };
 
-const createAddTaskBtn = () => {
+const createAddTaskBtn = (isEdit) => {
   const addTaskBtn = document.createElement('button');
   addTaskBtn.classList.add('addtask-btn');
-  addTaskBtn.textContent = 'Add task';
+  if (isEdit) addTaskBtn.textContent = 'Save';
+  if (!isEdit) addTaskBtn.textContent = 'Add task';
   addTaskBtnElm = addTaskBtn;
-  addTask();
+  addTask(isEdit);
+  saveTask(addTaskBtn, isEdit);
   return addTaskBtn;
 };

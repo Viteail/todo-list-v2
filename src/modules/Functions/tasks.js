@@ -2,6 +2,7 @@ import { createTask } from '../UI/task';
 import { todoListElm } from '../UI/todolist';
 import { currentProject } from './projects';
 import { createAddTask } from '../UI/taskAdder';
+import { todoFormElm } from '../UI/todoForm';
 
 export class Task {
   constructor(name, desc, dueDate, priority) {
@@ -41,6 +42,21 @@ export const appendTask = () => {
       },
       lastTask.priority,
       lastTask
+    )
+  );
+};
+
+export const appendEditedTask = (editedTask) => {
+  todoFormElm.insertAdjacentElement(
+    'afterend',
+    createTask(
+      {
+        name: editedTask.name,
+        desc: editedTask.desc,
+        dueDate: editedTask.dueDate,
+      },
+      editedTask.priority,
+      editedTask
     )
   );
 };

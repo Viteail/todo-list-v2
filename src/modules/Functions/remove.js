@@ -3,15 +3,14 @@ import { modalElm } from '../UI/modal';
 import { todoListElm } from '../UI/todolist';
 import { emptyTodoFormElms } from './addtask';
 import { currentProject, projects, setDefaultProject } from './projects';
+import { todoFormElm } from '../UI/todoForm';
 
-export let todoFormElm;
-
-export const cancelTodoForm = (btn) => {
-  btn.addEventListener('click', () => removeTodoForm());
+export const cancelTodoForm = (btn, isEdit) => {
+  btn.addEventListener('click', () => removeTodoForm(isEdit));
 };
 
-export const removeTodoForm = () => {
-  todoListElm.appendChild(createAddTask());
+export const removeTodoForm = (isEdit) => {
+  if (!isEdit) todoListElm.appendChild(createAddTask());
   emptyTodoFormElms();
   todoFormElm.remove();
 };
@@ -59,6 +58,6 @@ export const attachEventRemoveProject = (btn, projectElm) => {
   });
 };
 
-const removeElm = (elm) => {
+export const removeElm = (elm) => {
   elm.remove();
 };
