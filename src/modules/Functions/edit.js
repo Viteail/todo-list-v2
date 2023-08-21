@@ -15,6 +15,10 @@ export let isEdit;
 
 export const editTask = (editBtn, taskObj) => {
   editBtn.addEventListener('click', () => {
+    if (isEdit) {
+      appendEditedTask(editedTaskObj);
+      removeTodoForm();
+    }
     isEdit = true;
     let editedTask = currentProject.tasks.filter(
       (task) => task.elm === taskObj.elm
