@@ -1,4 +1,3 @@
-import { taskOptionsDOM } from './mouseover';
 import { createTodoForm } from '../UI/todoForm';
 import { currentProject } from './projects';
 import { removeElm, removeTodoForm } from './remove';
@@ -14,18 +13,17 @@ import { appendEditedTask } from './Tasks';
 export let editedTaskObj;
 export let isEdit;
 
-export const editTask = () => {
-  let lastTask = taskOptionsDOM[taskOptionsDOM.length - 1];
-  lastTask.edit.addEventListener('click', () => {
+export const editTask = (editBtn, taskObj) => {
+  editBtn.addEventListener('click', () => {
     isEdit = true;
     let editedTask = currentProject.tasks.filter(
-      (task) => task.elm === lastTask.task
+      (task) => task.elm === taskObj.elm
     );
     editedTask = editedTask[0];
     editedTaskObj = editedTask;
-    lastTask.task.insertAdjacentElement('afterend', createTodoForm(isEdit));
+    taskObj.elm.insertAdjacentElement('afterend', createTodoForm(isEdit));
     insertTaskInfo(editedTask);
-    removeElm(lastTask.task);
+    removeElm(taskObj.elm);
   });
 };
 
@@ -40,7 +38,7 @@ const formatDateDefault = (dueDate) => {
   return dueDate.replace(/-/gm, ' ').split(' ').reverse().join('-');
 };
 
-export const saveTask = (saveBtn, isEdit) => {
+export const saveTask = (saveBtn) => {
   if (!isEdit) return;
   attachValidClass(isEdit);
   saveBtn.addEventListener('click', () => {
@@ -50,7 +48,8 @@ export const saveTask = (saveBtn, isEdit) => {
     editedTaskObj.dueDate = formatDate(todoFormElms[2].value);
     editedTaskObj.priority = todoFormElms[3].value;
     appendEditedTask(editedTaskObj);
-    removeTodoForm(isEdit);
+    removeTodoForm();
     emptyTodoFormElms();
+    isEdit = false;
   });
 };

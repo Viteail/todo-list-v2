@@ -2,7 +2,7 @@ import {
   showTaskOptions,
   addEventEditBtn,
   addEventRemoveBtn,
-  addEventCheckListBtn,
+  addMouseCheckListEvent,
 } from '../Functions/mouseover';
 import { attachEventRemoveTask } from '../Functions/remove';
 import { editTask } from '../Functions/edit';
@@ -15,15 +15,13 @@ export let taskElm;
 export const createTask = (args, priority, taskObj) => {
   const task = document.createElement('div');
   task.classList.add('task');
+  taskObj.elm = task;
   task.appendChild(createCheckListWrapper(priority, taskObj));
   task.appendChild(createTaskInfoWrapper(args));
-  task.appendChild(createEditContainer());
+  task.appendChild(createEditContainer(taskObj));
   task.appendChild(createRemoveContainer(task));
   taskElm = task;
   showTaskOptions();
-  taskObj.elm = task;
-  editTask();
-  addCheckListEvent();
   return task;
 };
 
@@ -40,7 +38,8 @@ const createCheckListBtn = (priority, taskObj) => {
   checkListBtn.appendChild(createCheckListImg(priority));
   checkListBtn.appendChild(createCheckImg(priority));
   taskObj.checklist = checkListBtn;
-  addEventCheckListBtn(checkListBtn, priority);
+  addMouseCheckListEvent(checkListBtn, priority);
+  addCheckListEvent(checkListBtn, taskObj);
   return checkListBtn;
 };
 
@@ -89,19 +88,20 @@ const createDueDateContainer = (dueDate) => {
   return dueDateContainer;
 };
 
-const createEditContainer = () => {
+const createEditContainer = (taskObj) => {
   const editContainer = document.createElement('div');
   editContainer.classList.add('edit-container');
-  editContainer.appendChild(createEditBtn());
+  editContainer.appendChild(createEditBtn(taskObj));
   return editContainer;
 };
 
-const createEditBtn = () => {
+const createEditBtn = (taskObj) => {
   const editBtn = document.createElement('button');
   editBtn.classList.add('edit-btn', 'invisible');
   editBtn.appendChild(createEditImg());
   editBtnElm = editBtn;
   addEventEditBtn(editBtn);
+  editTask(editBtn, taskObj);
   return editBtn;
 };
 

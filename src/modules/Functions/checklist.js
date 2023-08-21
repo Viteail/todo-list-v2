@@ -1,15 +1,16 @@
 import { currentProject } from './projects';
 import { removeElm } from './remove';
 
-export const addCheckListEvent = () => {
-  const lastTask = currentProject.tasks[currentProject.tasks.length - 1];
-  const checkListImg = lastTask.checklist.firstElementChild;
-  lastTask.checklist.addEventListener('click', () => {
-    checkListImg.classList.add(`${lastTask.priority}`);
+export const addCheckListEvent = (checkListBtn, taskObj) => {
+  const checkListImg = checkListBtn.firstElementChild;
+  checkListBtn.addEventListener('click', () => {
+    checkListImg.classList.add(`${taskObj.priority}`);
     checkListImg.style.animation = 'check 250ms linear';
   });
   checkListImg.addEventListener('animationend', () => {
-    currentProject.tasks.splice(lastTask, 1);
-    removeElm(lastTask.elm);
+    currentProject.tasks.forEach((item, index) => {
+      if (item.elm === taskObj.elm) currentProject.tasks.splice(index, 1);
+    });
+    removeElm(taskObj.elm);
   });
 };

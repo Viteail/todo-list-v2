@@ -1,13 +1,17 @@
 import { createTodoForm } from '../UI/todoForm';
 import { removeTodoForm } from './remove';
-import { Task, appendTask } from './Tasks';
+import { Task, appendTask, appendEditedTask } from './Tasks';
 import format from 'date-fns/format';
 import { currentProject } from './projects';
-import { isEdit } from './edit';
+import { isEdit, editedTaskObj } from './edit';
 
 export const addTaskEvent = (taskAdder) => {
   taskAdder.addEventListener('click', () => {
-    isEdit = false;
+    if (isEdit) {
+      appendEditedTask(editedTaskObj);
+      removeTodoForm();
+      return;
+    }
     taskAdder.parentElement.appendChild(createTodoForm(isEdit));
     taskAdder.remove();
   });
@@ -32,7 +36,7 @@ export const addTask = (isEdit) => {
     );
     currentProject.tasks.push(todo);
     appendTask();
-    removeTodoForm(isEdit);
+    removeTodoForm();
     emptyTodoFormElms();
   });
 };

@@ -24,7 +24,6 @@ const createTaskNameInput = () => {
   taskNameInput.classList.add('taskname-input');
   taskNameInput.placeholder = 'Task name';
   todoFormElms.push(taskNameInput);
-  console.log(todoFormElms);
   return taskNameInput;
 };
 

@@ -63,7 +63,7 @@ export const addEventRemoveBtn = (removeBtn) => {
   changeImgOnHover(removeBtn, firstImg, secondImg);
 };
 
-export const addEventCheckListBtn = (checkListBtn, priority) => {
+export const addMouseCheckListEvent = (checkListBtn, priority) => {
   let firstImg;
   let secondImg;
   if (priority === 'low') {
