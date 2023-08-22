@@ -47,11 +47,13 @@ export const saveTask = (saveBtn) => {
   attachValidClass(isEdit);
   saveBtn.addEventListener('click', () => {
     if (!validateForm() || !isEdit) return;
+    // maybe add like a initial task object
+    const initialTask = { ...editedTaskObj };
     editedTaskObj.name = todoFormElms[0].value;
     editedTaskObj.desc = todoFormElms[1].value;
     editedTaskObj.dueDate = formatDate(todoFormElms[2].value);
     editedTaskObj.priority = todoFormElms[3].value;
-    appendEditedTask(editedTaskObj);
+    appendEditedTask(editedTaskObj, initialTask);
     removeTodoForm();
     emptyTodoFormElms();
     isEdit = false;

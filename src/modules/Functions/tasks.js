@@ -1,5 +1,10 @@
 import { createTask } from '../UI/task';
-import { todoListElm } from '../UI/todolist';
+import {
+  todoListElm,
+  highPriorityContainerElm,
+  mediumPriorityContainerElm,
+  lowPriorityContainerElm,
+} from '../UI/todolist';
 import { currentProject } from './projects';
 import { createAddTask } from '../UI/taskAdder';
 import { todoFormElm } from '../UI/todoForm';
@@ -16,38 +21,19 @@ export class Task {
 }
 
 export const loadTasks = () => {
-  currentProject.tasks.forEach((task) =>
-    todoListElm.appendChild(
-      createTask(
-        {
-          name: task.name,
-          desc: task.desc,
-          dueDate: task.dueDate,
-        },
-        task.priority,
-        task
-      )
-    )
-  );
+  currentProject.tasks.forEach((task) => appendTaskByPriority(task));
   todoListElm.appendChild(createAddTask());
 };
 
 export const appendTask = () => {
   let lastTask = currentProject.tasks[currentProject.tasks.length - 1];
-  todoListElm.appendChild(
-    createTask(
-      {
-        name: lastTask.name,
-        desc: lastTask.desc,
-        dueDate: lastTask.dueDate,
-      },
-      lastTask.priority,
-      lastTask
-    )
-  );
+  appendTaskByPriority(lastTask);
 };
 
-export const appendEditedTask = (editedTask) => {
+export const appendEditedTask = (editedTask, initialTask) => {
+  if (initialTask !== undefined && editedTask.priority !== initialTask.priority)
+    return appendTaskByPriority(editedTask);
+
   todoFormElm.insertAdjacentElement(
     'afterend',
     createTask(
@@ -65,5 +51,45 @@ export const appendEditedTask = (editedTask) => {
 export const removeTaskAdder = () => {
   for (const elm of todoListElm.childNodes) {
     if (elm.classList.contains('task-add')) elm.remove();
+  }
+};
+
+const appendTaskByPriority = (taskObj) => {
+  if (taskObj.priority === 'high')
+    highPriorityContainerElm.appendChild(
+      createTask(
+        {
+          name: taskObj.name,
+          desc: taskObj.desc,
+          dueDate: taskObj.dueDate,
+        },
+        taskObj.priority,
+        taskObj
+      )
+    );
+  if (taskObj.priority === 'medium')
+    mediumPriorityContainerElm.appendChild(
+      createTask(
+        {
+          name: taskObj.name,
+          desc: taskObj.desc,
+          dueDate: taskObj.dueDate,
+        },
+        taskObj.priority,
+        taskObj
+      )
+    );
+  if (taskObj.priority === 'low') {
+    lowPriorityContainerElm.appendChild(
+      createTask(
+        {
+          name: taskObj.name,
+          desc: taskObj.desc,
+          dueDate: taskObj.dueDate,
+        },
+        taskObj.priority,
+        taskObj
+      )
+    );
   }
 };

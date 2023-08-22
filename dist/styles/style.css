@@ -146,7 +146,6 @@ select {
 .todolist {
   display: flex;
   flex-direction: column;
-  gap: 25px;
   width: 100%;
   max-width: 800px;
 }
@@ -154,6 +153,7 @@ select {
 .project-name {
   font-weight: 900;
   font-size: 1.2rem;
+  margin-bottom: 25px;
 }
 
 .priorityhigh-text,
@@ -170,6 +170,7 @@ select {
   display: flex;
   align-items: center;
   gap: 5px;
+  margin-top: 5px;
 }
 
 .task-add-btn {
@@ -178,7 +179,7 @@ select {
 
 .task-add-text {
   font-size: 0.95rem;
-  color: var(--slate-600);
+  color: var(--slate-500);
 }
 
 .task-add:hover * {
@@ -279,7 +280,7 @@ select {
 
 .task {
   display: flex;
-  border-bottom: 1px solid var(--slate-300);
+  border-bottom: 1px solid var(--slate-200);
   padding: 8px 0px;
 }
 
@@ -503,6 +504,13 @@ select {
 
 .high {
   background: var(--red-600);
+}
+
+.high-priority-container,
+.medium-priority-container,
+.low-priority-container {
+  display: flex;
+  flex-direction: column;
 }
 
 .valid {

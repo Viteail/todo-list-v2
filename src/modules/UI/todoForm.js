@@ -97,6 +97,6 @@ const createAddTaskBtn = (isEdit) => {
   if (!isEdit) addTaskBtn.textContent = 'Add task';
   addTaskBtnElm = addTaskBtn;
   addTask(isEdit);
-  saveTask(addTaskBtn, isEdit);
+  saveTask(addTaskBtn);
   return addTaskBtn;
 };
