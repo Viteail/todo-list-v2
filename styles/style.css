@@ -279,6 +279,7 @@ select {
 }
 
 .task {
+  position: relative;
   display: flex;
   border-bottom: 1px solid var(--slate-200);
   padding: 8px 0px;
@@ -302,6 +303,7 @@ select {
 }
 
 .duedate-container {
+  flex: 1;
   font-size: 0.9rem;
 }
 
@@ -318,6 +320,18 @@ select {
   border-radius: 50%;
 }
 
+.edit-container {
+  position: absolute;
+  right: 26px;
+  width: 26px;
+}
+
+.remove-container {
+  position: absolute;
+  right: 0;
+  width: 26px;
+}
+
 .edit-img,
 .remove-img {
   width: 20px;
@@ -329,11 +343,16 @@ select {
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 1;
   height: 26px;
   width: 26px;
   border-radius: 5px;
   border: none;
-  background: none;
+  background: var(--white);
+}
+
+.edit-btn {
+  box-shadow: -2px 0px 5px 5px var(--white);
 }
 
 .edit-btn:hover,
@@ -511,6 +530,15 @@ select {
 .low-priority-container {
   display: flex;
   flex-direction: column;
+}
+
+.due-date-project-wrapper {
+  display: flex;
+}
+
+.project-name-task-container {
+  font-size: 0.9rem;
+  color: var(--slate-500);
 }
 
 .valid {
