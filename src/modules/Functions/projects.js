@@ -4,6 +4,7 @@ import { removeTaskAdder, loadTasks } from './Tasks';
 import { todoListContainerElm, createTodoList } from '../UI/todolist';
 import { removeTodoList } from './remove';
 import { emptyTodoFormElms } from './addtask';
+import { isEdit } from './edit';
 
 export class Project {
   constructor(name, color) {
@@ -56,4 +57,5 @@ const loadProjectContent = () => {
   removeTaskAdder();
   loadTasks();
   emptyTodoFormElms();
+  isEdit = false;
 };

@@ -7,6 +7,7 @@ import {
 import { attachEventRemoveTask } from '../Functions/remove';
 import { editTask } from '../Functions/edit';
 import { addCheckListEvent } from '../Functions/checklist';
+import { getProjectName } from '../Functions/todayTodoList';
 
 export let editBtnElm;
 export let removeTaskBtnElm;
@@ -17,9 +18,9 @@ export const createTask = (args, priority, taskObj) => {
   task.classList.add('task');
   taskObj.elm = task;
   task.appendChild(createCheckListWrapper(priority, taskObj));
-  task.appendChild(createTaskInfoWrapper(args));
+  task.appendChild(createTaskInfoWrapper(args, taskObj));
   task.appendChild(createEditContainer(taskObj));
-  task.appendChild(createRemoveContainer(task));
+  task.appendChild(createRemoveContainer(taskObj));
   taskElm = task;
   showTaskOptions();
   return task;
@@ -57,13 +58,13 @@ const createCheckImg = (priority) => {
   return checkImg;
 };
 
-const createTaskInfoWrapper = (args) => {
+const createTaskInfoWrapper = (args, taskObj) => {
   const { name, desc, dueDate } = args;
   const taskInfoWrapper = document.createElement('div');
   taskInfoWrapper.classList.add('taskinfo-wrapper');
   taskInfoWrapper.appendChild(createNameContainer(name));
   taskInfoWrapper.appendChild(createDescContainer(desc));
-  taskInfoWrapper.appendChild(createDueDateContainer(dueDate));
+  taskInfoWrapper.appendChild(createDueDateProjectWrapper(dueDate, taskObj));
   return taskInfoWrapper;
 };
 
@@ -81,11 +82,26 @@ const createDescContainer = (desc) => {
   return descContainer;
 };
 
+const createDueDateProjectWrapper = (dueDate, taskObj) => {
+  const wrapper = document.createElement('div');
+  wrapper.classList.add('due-date-project-wrapper');
+  wrapper.appendChild(createDueDateContainer(dueDate));
+  wrapper.appendChild(createProjectNameContainer(taskObj));
+  return wrapper;
+};
+
 const createDueDateContainer = (dueDate) => {
   const dueDateContainer = document.createElement('div');
   dueDateContainer.classList.add('duedate-container');
   dueDateContainer.textContent = dueDate;
   return dueDateContainer;
+};
+
+const createProjectNameContainer = (taskObj) => {
+  const projectNameContainer = document.createElement('div');
+  projectNameContainer.classList.add('project-name-task-container');
+  projectNameContainer.textContent = getProjectName(taskObj);
+  return projectNameContainer;
 };
 
 const createEditContainer = (taskObj) => {
@@ -112,19 +128,19 @@ const createEditImg = () => {
   return editImg;
 };
 
-const createRemoveContainer = (taskElm) => {
+const createRemoveContainer = (taskObj) => {
   const removeContainer = document.createElement('div');
   removeContainer.classList.add('remove-container');
-  removeContainer.appendChild(createRemoveBtn(taskElm));
+  removeContainer.appendChild(createRemoveBtn(taskObj));
   return removeContainer;
 };
 
-const createRemoveBtn = (taskElm) => {
+const createRemoveBtn = (taskObj) => {
   const removeBtn = document.createElement('button');
   removeBtn.classList.add('remove-btn', 'invisible');
   removeBtn.appendChild(createRemoveImg());
   removeTaskBtnElm = removeBtn;
-  attachEventRemoveTask(removeBtn, taskElm);
+  attachEventRemoveTask(removeBtn, taskObj);
   addEventRemoveBtn(removeBtn);
   return removeBtn;
 };

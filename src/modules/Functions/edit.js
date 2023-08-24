@@ -1,5 +1,5 @@
 import { createTodoForm } from '../UI/todoForm';
-import { currentProject } from './projects';
+import { currentProject, projects } from './projects';
 import { removeElm, removeTodoForm } from './remove';
 import {
   todoFormElms,
@@ -9,6 +9,7 @@ import {
   emptyTodoFormElms,
 } from './addtask';
 import { appendEditedTask } from './Tasks';
+import { getTodayDate } from './todayTodoList';
 
 export let editedTaskObj;
 export let isEdit;
@@ -44,15 +45,25 @@ const formatDateDefault = (dueDate) => {
 
 export const saveTask = (saveBtn) => {
   if (!isEdit) return;
+  const todayTodoList = projects.find((project) => project.name === 'Today');
   attachValidClass(isEdit);
   saveBtn.addEventListener('click', () => {
     if (!validateForm() || !isEdit) return;
-    // maybe add like a initial task object
     const initialTask = { ...editedTaskObj };
     editedTaskObj.name = todoFormElms[0].value;
     editedTaskObj.desc = todoFormElms[1].value;
     editedTaskObj.dueDate = formatDate(todoFormElms[2].value);
     editedTaskObj.priority = todoFormElms[3].value;
+    if (
+      currentProject === todayTodoList &&
+      editedTaskObj.dueDate !== getTodayDate()
+    ) {
+      removeTodoForm();
+      emptyTodoFormElms();
+      removeElm(editedTaskObj.elm);
+      isEdit = false;
+      return;
+    }
     appendEditedTask(editedTaskObj, initialTask);
     removeTodoForm();
     emptyTodoFormElms();

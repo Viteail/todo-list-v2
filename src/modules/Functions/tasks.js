@@ -8,6 +8,7 @@ import {
 import { currentProject } from './projects';
 import { createAddTask } from '../UI/taskAdder';
 import { todoFormElm } from '../UI/todoForm';
+import { addTodayTasks } from './todayTodoList';
 
 export class Task {
   constructor(name, desc, dueDate, priority) {
@@ -21,6 +22,7 @@ export class Task {
 }
 
 export const loadTasks = () => {
+  addTodayTasks();
   currentProject.tasks.forEach((task) => appendTaskByPriority(task));
   todoListElm.appendChild(createAddTask());
 };

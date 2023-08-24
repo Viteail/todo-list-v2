@@ -2,8 +2,9 @@ import { createTodoForm } from '../UI/todoForm';
 import { removeTodoForm } from './remove';
 import { Task, appendTask, appendEditedTask } from './Tasks';
 import format from 'date-fns/format';
-import { currentProject } from './projects';
+import { currentProject, projects } from './projects';
 import { isEdit, editedTaskObj } from './edit';
+import { getTodayDate } from './todayTodoList';
 
 export const addTaskEvent = (taskAdder) => {
   taskAdder.addEventListener('click', () => {
@@ -23,6 +24,8 @@ export let addTaskBtnElm;
 
 export const addTask = (isEdit) => {
   if (isEdit) return;
+  const inboxTodoList = projects.find((project) => project.name === 'Inbox');
+  const todayTodoList = projects.find((project) => project.name === 'Today');
   attachValidClass(isEdit);
   addTaskBtnElm.addEventListener('click', () => {
     if (!validateForm() || isEdit) return;
@@ -34,6 +37,14 @@ export const addTask = (isEdit) => {
       formatDate(todoFormElms[2].value),
       todoFormElms[3].value
     );
+    if (currentProject === todayTodoList) {
+      inboxTodoList.tasks.push(todo);
+      if (todo.dueDate !== getTodayDate()) {
+        removeTodoForm();
+        emptyTodoFormElms();
+        return;
+      }
+    }
     currentProject.tasks.push(todo);
     appendTask();
     removeTodoForm();

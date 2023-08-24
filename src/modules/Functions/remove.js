@@ -41,12 +41,25 @@ export const removeTodoList = () => {
   todoListElm.remove();
 };
 
-export const attachEventRemoveTask = (btn, taskElm) => {
+export const attachEventRemoveTask = (btn, taskObj) => {
+  const todayTodoList = projects.find((project) => project.name === 'Today');
   btn.addEventListener('click', () => {
+    if (currentProject === todayTodoList) {
+      projects.forEach((project) => {
+        if (project !== todayTodoList && project.tasks.includes(taskObj))
+          project.tasks.splice(project.tasks.indexOf(taskObj), 1);
+      });
+    }
+    if (
+      currentProject !== todayTodoList &&
+      todayTodoList.tasks.includes(taskObj)
+    ) {
+      todayTodoList.tasks.splice(todayTodoList.tasks.indexOf(taskObj), 1);
+    }
     currentProject.tasks.forEach((task, index) => {
-      if (task.elm === taskElm) {
+      if (task.elm === taskObj.elm) {
         currentProject.tasks.splice(index, 1);
-        removeElm(taskElm);
+        removeElm(taskObj.elm);
       }
     });
   });
