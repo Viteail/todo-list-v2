@@ -6,6 +6,7 @@ import { currentProject, projects, setDefaultProject } from './projects';
 import { todoFormElm } from '../UI/todoForm';
 import { editedTaskObj, isEdit } from './edit';
 import { appendEditedTask } from './Tasks';
+import { storageProjects } from './storage';
 
 export const cancelTodoForm = (btn) => {
   btn.addEventListener('click', () => {
@@ -60,6 +61,7 @@ export const attachEventRemoveTask = (btn, taskObj) => {
       if (task.elm === taskObj.elm) {
         currentProject.tasks.splice(index, 1);
         removeElm(taskObj.elm);
+        storageProjects();
       }
     });
   });
@@ -72,6 +74,7 @@ export const attachEventRemoveProject = (btn, projectElm) => {
         projects.splice(index, 1);
         setDefaultProject(projectElm);
         removeElm(projectElm);
+        storageProjects();
       }
     });
   });

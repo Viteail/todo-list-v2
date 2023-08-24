@@ -9,6 +9,7 @@ import { currentProject } from './projects';
 import { createAddTask } from '../UI/taskAdder';
 import { todoFormElm } from '../UI/todoForm';
 import { addTodayTasks } from './todayTodoList';
+import { storageProjects } from './storage';
 
 export class Task {
   constructor(name, desc, dueDate, priority) {
@@ -30,6 +31,7 @@ export const loadTasks = () => {
 export const appendTask = () => {
   let lastTask = currentProject.tasks[currentProject.tasks.length - 1];
   appendTaskByPriority(lastTask);
+  storageProjects();
 };
 
 export const appendEditedTask = (editedTask, initialTask) => {
@@ -56,7 +58,7 @@ export const removeTaskAdder = () => {
   }
 };
 
-const appendTaskByPriority = (taskObj) => {
+export const appendTaskByPriority = (taskObj) => {
   if (taskObj.priority === 'high')
     highPriorityContainerElm.appendChild(
       createTask(

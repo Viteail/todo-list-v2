@@ -10,6 +10,7 @@ import {
 } from './addtask';
 import { appendEditedTask } from './Tasks';
 import { getTodayDate } from './todayTodoList';
+import { storageProjects } from './storage';
 
 export let editedTaskObj;
 export let isEdit;
@@ -62,11 +63,13 @@ export const saveTask = (saveBtn) => {
       emptyTodoFormElms();
       removeElm(editedTaskObj.elm);
       isEdit = false;
+      storageProjects();
       return;
     }
     appendEditedTask(editedTaskObj, initialTask);
     removeTodoForm();
     emptyTodoFormElms();
     isEdit = false;
+    storageProjects();
   });
 };

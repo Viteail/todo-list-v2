@@ -1,5 +1,6 @@
 import { currentProject, projects } from './projects';
 import { removeElm } from './remove';
+import { storageProjects } from './storage';
 
 export const addCheckListEvent = (checkListBtn, taskObj) => {
   const todayTodoList = projects.find((project) => project.name === 'Today');
@@ -25,5 +26,6 @@ export const addCheckListEvent = (checkListBtn, taskObj) => {
       if (item.elm === taskObj.elm) currentProject.tasks.splice(index, 1);
     });
     removeElm(taskObj.elm);
+    storageProjects();
   });
 };

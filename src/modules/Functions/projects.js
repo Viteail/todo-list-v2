@@ -1,10 +1,12 @@
 import { projectMenuElm } from '../UI/sidebar';
 import { createProject } from '../UI/project';
-import { removeTaskAdder, loadTasks } from './Tasks';
+import { removeTaskAdder, loadTasks, appendTaskByPriority } from './Tasks';
 import { todoListContainerElm, createTodoList } from '../UI/todolist';
 import { removeTodoList } from './remove';
 import { emptyTodoFormElms } from './addtask';
 import { isEdit } from './edit';
+import { storageProjects } from './storage';
+import { addTodayTasks } from './todayTodoList';
 
 export class Project {
   constructor(name, color) {
@@ -24,6 +26,19 @@ export const appendProject = () => {
   projectMenuElm.appendChild(
     createProject(lastProject, lastProject.name, lastProject.color)
   );
+  storageProjects();
+};
+
+const appendStoredProject = () => {
+  const todayTodoList = projects.find((project) => project.name === 'Today');
+  const inboxTodoList = projects.find((project) => project.name === 'Inbox');
+  projects.forEach((project) => {
+    if (project !== todayTodoList && project !== inboxTodoList) {
+      projectMenuElm.appendChild(
+        createProject(project, project.name, project.color)
+      );
+    }
+  });
 };
 
 export const toggleCurrentProject = (project) => {
@@ -58,4 +73,17 @@ const loadProjectContent = () => {
   loadTasks();
   emptyTodoFormElms();
   isEdit = false;
+};
+
+export const loadProjects = () => {
+  const inboxTodoList = projects.find((project) => (project.name = 'Inbox'));
+  const storedProjects = JSON.parse(localStorage.getItem('projects'));
+  inboxTodoList.tasks = JSON.parse(localStorage.getItem('inboxTodoTasks'));
+  if (inboxTodoList.tasks === null) inboxTodoList.tasks = [];
+  addTodayTasks();
+  currentProject.tasks.forEach((task) => appendTaskByPriority(task));
+  if (storedProjects !== null) {
+    projects = projects.concat(storedProjects);
+    appendStoredProject();
+  }
 };
