@@ -5,6 +5,7 @@ import format from 'date-fns/format';
 import { currentProject, projects } from './projects';
 import { isEdit, editedTaskObj } from './edit';
 import { getTodayDate } from './todayTodoList';
+import { storageProjects } from './storage';
 
 export const addTaskEvent = (taskAdder) => {
   taskAdder.addEventListener('click', () => {
@@ -42,6 +43,7 @@ export const addTask = (isEdit) => {
       if (todo.dueDate !== getTodayDate()) {
         removeTodoForm();
         emptyTodoFormElms();
+        storageProjects();
         return;
       }
     }

@@ -68,9 +68,14 @@ export const attachEventRemoveTask = (btn, taskObj) => {
 };
 
 export const attachEventRemoveProject = (btn, projectElm) => {
+  const todayTodoList = projects.find((project) => project.name === 'Today');
   btn.addEventListener('click', () => {
     projects.forEach((project, index) => {
       if (project.elm === projectElm) {
+        project.tasks.forEach((task) => {
+          if (todayTodoList.tasks.includes(task))
+            todayTodoList.tasks.splice(todayTodoList.tasks.indexOf(task), 1);
+        });
         projects.splice(index, 1);
         setDefaultProject(projectElm);
         removeElm(projectElm);
