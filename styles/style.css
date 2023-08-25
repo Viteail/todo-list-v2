@@ -151,6 +151,7 @@ select {
 }
 
 .project-name {
+  word-break: break-word;
   font-weight: 900;
   font-size: 1.2rem;
   margin-bottom: 25px;
@@ -462,9 +463,11 @@ select {
 }
 
 .project {
+  position: relative;
   cursor: pointer;
   display: flex;
   align-items: center;
+  word-break: break-word;
   padding: 8px;
   border-radius: 5px;
   gap: 10px;
@@ -475,6 +478,8 @@ select {
 }
 
 .project-remove-btn {
+  position: absolute;
+  right: 0;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -502,6 +507,7 @@ select {
 
 .project-name-container {
   flex: 1;
+  padding-right: 20px;
 }
 
 .check-img {
@@ -581,5 +587,15 @@ select {
   100% {
     opacity: 0.5;
     transform: scale(1.2);
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .content {
+    flex-direction: column;
+  }
+  .sidebar {
+    max-width: none;
+    flex: none;
   }
 }
